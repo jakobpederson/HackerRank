@@ -1,0 +1,45 @@
+#!/bin/python3
+# https://www.hackerrank.com/challenges/cats-and-a-mouse
+
+import sys
+
+class CatsAndMouse:
+    
+    def get_who_catches_mouse(self, positions):
+        distance_a_to_c, distance_b_to_c = self.get_distances_to_mouse(positions)
+        if abs(distance_a_to_c) > abs(distance_b_to_c):
+            return "Cat B"
+        elif abs(distance_a_to_c) == abs(distance_b_to_c):
+            return "Mouse C"
+        return "Cat A"
+    
+    def get_distances_to_mouse(self, positions):
+        distance_a_to_c = positions[0] - positions[2]
+        distance_b_to_c = positions[1] - positions[2]
+        return distance_a_to_c, distance_b_to_c
+
+def test_cats_and_mouse():
+    initial_positions = [[1, 2, 3], [1, 3, 2], [2, 1, 3]]
+    cats_and_mouse = CatsAndMouse()
+    results = []
+    for positions in initial_positions:
+        if positions == [1, 2, 3] and cats_and_mouse.get_who_catches_mouse(positions) == "Cat B":
+            print("True")
+        elif positions == [1, 3, 2] and cats_and_mouse.get_who_catches_mouse(positions) == "Mouse C":
+            print("True")
+        elif positions == [2, 1, 3] and cats_and_mouse.get_who_catches_mouse(positions) == "Cat A":
+            print("True")
+        else:
+            print("Error %s" % positions)
+
+initial_positions = []
+q = int(input().strip())
+for a0 in range(q):
+    x,y,z = input().strip().split(' ')
+    initial_positions.append([int(x),int(y),int(z)])
+    
+#test_cats_and_mouse()
+cat_and_mouse = CatsAndMouse()
+for positions in initial_positions:
+    print(cat_and_mouse.get_who_catches_mouse(positions))
+

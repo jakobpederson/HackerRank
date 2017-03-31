@@ -1,0 +1,73 @@
+#!/bin/python3
+# https://www.hackerrank.com/challenges/angry-professor
+
+import sys
+
+class ClassInfo:
+    
+    def __init__(self, x, y):
+        self.list_of_students_and_threshold = x
+        self.list_of_lists_of_arrival_times = y
+    
+    @property
+    def count_arrived_on_time(self):
+        new_list = []
+        for student_arrivals in self.list_of_lists_of_arrival_times:
+            count = len(list(x for x in student_arrivals if x <= 0))
+            new_list.append(count)
+        return new_list
+    
+    @property
+    def professor_thresholds(self):
+        threshold_list = list(x[1] for x in self.list_of_students_and_threshold)
+        return threshold_list
+
+    
+def angry_professor(students_info):
+    cancel_class = []
+    for i in range(len(students_info.count_arrived_on_time)):
+        if students_info.count_arrived_on_time[i] < students_info.professor_thresholds[i]:
+            cancel_class.append("YES")
+        else:
+            cancel_class.append("NO") 
+    return cancel_class
+
+
+def test_angry_professor():
+    a = [
+        [10, 4], [10, 10],[10, 9],[10, 8],[10, 7], 
+        [10, 2], [10, 10], [10, 9], [10, 6], [10, 1]
+        ]   
+    b =[
+        [-93, -86, 49, -62, -90, -63, 40, 72, 11, 67],
+        [23, -35, -2, 58, -67, -56, -42, -73, -19, 37],
+        [13, 91, 56, -62, 96, -5, -84, -36, -46, -13],
+        [45, 67, 64, -50, -8, 78, 84, -51, 99, 60],
+        [26, 94, -95, 34, 67, -97, 17, 52, 1, 86],
+        [19, 29, -17, -71, -75, -27, -56, -53, 65, 83],
+        [-32, -3, -70, 8, -40, -96, -18, -46, -21, -79],
+        [-50, 0, 64, 14, -56, -91, -65, -36, 51, -28],
+        [-58, -29, -35, -18, 43, -28, -76, 43, -13, 6],
+        [88, -17, -96, 43, 83, 99, 25, 90, -39, 86]
+        ]
+    expected = ["NO", "YES", "YES", "YES", "YES", "NO", "YES", "YES", "NO", "NO"]
+    students_info = ClassInfo(a, b)
+    for i in range(0, len(expected)):
+        if (expected[i] == angry_professor(students_info)[i]):
+            print(True)
+        else:
+            print(False)
+    
+
+x = []
+y = []
+t = int(input().strip())
+for a0 in range(t):
+    n,k = input().strip().split(' ')
+    x.append([int(n),int(k)])
+    y.append(list(int(a_temp) for a_temp in input().strip().split(' ')))
+
+students_info = ClassInfo(x, y)
+test_angry_professor()
+#for thing in angry_professor(students_info):
+#    print(thing)

@@ -1,0 +1,42 @@
+#!python
+# https://www.hackerrank.com/challenges/apple-and-orange
+
+import sys
+
+def number_of_apples_and_oranges(house_range, tree_a_to_tree_b, apple_positions, orange_positions):
+    tree_a = tree_a_to_tree_b[0]
+    tree_b = tree_a_to_tree_b[1]
+    apple_landings = list(x + tree_a for x in apple_positions)
+    orange_landings = list(x + tree_b for x in orange_positions)
+    fallen_apples = count_fruit_that_land_on_house(apple_landings, house_range)
+    fallen_oranges = count_fruit_that_land_on_house(orange_landings, house_range)
+    return [sum(fallen_apples), sum(fallen_oranges)]
+
+def count_fruit_that_land_on_house(fruit_list, house_values):
+    count = 0
+    for fruit in fruit_list:
+        if fruit >= house_values[0] and fruit <= house_values[1]:
+            yield count + 1
+
+def test_number_of_apples_and_oranges():
+    house_range = [7, 11]
+    tree_a_to_tree_b = [5, 15]
+    apple_positions = [-2, 2, 1]
+    orange_positions = [5, -6]
+    print("%s: %s" % ([1, 1] == number_of_apples_and_oranges([7, 11], [5, 15], [-2, 2, 1], [5, -6]),                                                 number_of_apples_and_oranges([7, 11], [5, 15], [-2, 2, 1], [5, -6])))
+    print("%s: %s" % ([2, 1] == number_of_apples_and_oranges([7, 11], [5, 15], [2, 2, 1], [5, -6]),                                                 number_of_apples_and_oranges([7, 11], [5, 15], [2, 2, 1], [5, -6])))
+    print("%s: %s" % ([3, 2] == number_of_apples_and_oranges([7, 11], [5, 15], [2, 2, 2], [-6, -6]),                                                 number_of_apples_and_oranges([7, 11], [5, 15], [2, 2, 2], [-6, -6])))
+    print("%s: %s" % ([4, 2] == number_of_apples_and_oranges([7, 11], [5, 15], [2, 2, 2, 2], [-6, -4]),                                             number_of_apples_and_oranges([7, 11], [5, 15], [2, 2, 2, 2], [-6, -4])))
+
+s,t = input().strip().split(' ')
+house_range = s,t = [int(s),int(t)]
+a,b = input().strip().split(' ')
+tree_a_to_tree_b = a,b = [int(a),int(b)]
+m,n = input().strip().split(' ')
+numbers_of_fruit = m,n = [int(m),int(n)]
+apple_positions = [int(apple_temp) for apple_temp in input().strip().split(' ')]
+orange_positions = [int(orange_temp) for orange_temp in input().strip().split(' ')]
+
+#test_number_of_apples_and_oranges()
+for value in number_of_apples_and_oranges(house_range, tree_a_to_tree_b, apple_positions, orange_positions):
+    print(value)

@@ -1,0 +1,30 @@
+#!/bin/python3
+# https://www.hackerrank.com/challenges/plus-minus
+
+import sys
+
+def fractions_pos_neg_zero(arr):
+    count_pos = 0
+    count_neg = 0
+    count_zero = 0
+    for i in arr:
+        if i > 0:
+            count_pos = count_pos + 1
+        elif i < 0:
+            count_neg = count_neg + 1
+        else:
+            count_zero = count_zero + 1
+    return [(count_pos/len(arr)), (count_neg/len(arr)), (count_zero/len(arr))]
+
+def test_fractions_pos_neg_zero():
+    input = [-4, 3, -9, 0, 4, 1]
+    print("Expected:\n%s\nResult:\n%s" % ([0.500000, 0.333333, 0.166667], fractions_pos_neg_zero(input)))
+
+
+n = int(input().strip())
+arr = [int(arr_temp) for arr_temp in input().strip().split(' ')]
+
+
+#test_fractions_pos_neg_zero()
+for i in fractions_pos_neg_zero(arr):
+    print ("%6f" % i)

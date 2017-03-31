@@ -1,0 +1,60 @@
+#!/bin/python3
+#https://www.hackerrank.com/challenges/drawing-book
+
+import sys
+from itertools import zip_longest
+
+
+n = int(input().strip())
+p = int(input().strip())
+# your code goes here
+
+
+def test_drawing_book():
+    book = Book(6, 2)
+    book2 = Book(5, 4)
+    book3 = Book(6, 4)
+    book4 = Book(1, 1)
+    print(1 == drawing_book(book))
+    print(0 == drawing_book(book2))
+    print(1 == drawing_book(book3))
+    print(0 == drawing_book(book4))
+    
+
+def drawing_book(book):
+    count_forward = next(get_page_turns(book.get_pages(), book.target_page))
+    count_backward = next(get_page_turns(book.get_reverse_pages(), book.target_page))
+    if count_forward > count_backward:
+        return count_backward
+    return count_forward
+    
+
+def get_page_turns(book_pages, target_page):
+    for item in book_pages:
+        if target_page in item:
+            yield book_pages.index(item)
+
+
+class Book:
+    
+    def __init__(self, n, p):
+        self.number_of_pages = n
+        self.target_page = p
+        
+    def get_pages(self):
+        if self.number_of_pages < 2:
+            return [(0, 1)]
+        list_of_tuples = []
+        new_list = list(range(0, self.number_of_pages + 1))
+        it = iter(new_list)
+        list_of_tuples = list(zip_longest(it, it, fillvalue=0))
+        return list_of_tuples
+    
+    def get_reverse_pages(self):
+        pages = self.get_pages()
+        pages.reverse()
+        return pages
+
+book = Book(n, p)
+#test_drawing_book()
+print(drawing_book(book))

@@ -1,0 +1,30 @@
+#!python
+# https://www.hackerrank.com/challenges/kangaroo
+
+import sys
+
+
+def do_kangaroos_intersect(kangaroos):
+    start_position_1 = kangaroos[0]
+    velocity_1 = kangaroos[1]
+    start_position_2 = kangaroos[2]
+    velocity_2 = kangaroos[3]
+    if velocity_2 != velocity_1:
+        time_to_intersect = (start_position_1 - start_position_2)/(velocity_2 - velocity_1)
+        if time_to_intersect > 0 and time_to_intersect.is_integer():
+            return "YES"
+    return "NO"
+
+
+def test_do_kangaroos_intersect():
+    print("NO" == do_kangaroos_intersect([0, 2, 5, 3]))
+    print("YES" == do_kangaroos_intersect([0, 3, 4, 2]))
+    print("NO" == do_kangaroos_intersect([43, 2, 70, 2]))
+    print("NO" == do_kangaroos_intersect([28, 8, 96, 2]))
+    print("NO" == do_kangaroos_intersect([28, 2, 96, 2])) 
+    
+x1,v1,x2,v2 = input().strip().split(' ')
+kangaroos = x1,v1,x2,v2 = [int(x1),int(v1),int(x2),int(v2)]
+
+#test_do_kangaroos_intersect()
+print(do_kangaroos_intersect(kangaroos))

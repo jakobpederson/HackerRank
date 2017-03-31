@@ -1,0 +1,28 @@
+#!/bin/python
+# https://www.hackerrank.com/challenges/mini-max-sum
+
+import sys
+
+def list_minus_max_or_min(original_list, max_or_min):
+    if max_or_min == "max":
+        original_list.pop(original_list.index(max(original_list)))
+    else:
+        original_list.pop(original_list.index(min(original_list)))
+    return original_list
+
+def calculate_min_and_max_out_of_five_ints(first_copy_of_list):
+    second_copy_of_list = list(five_ints)
+    return [sum(list_minus_max_or_min(first_copy_of_list, "max")), 
+            sum(list_minus_max_or_min(second_copy_of_list, "min"))]
+
+def test_calculate_min_and_max_out_of_five_ints():
+    if calculate_min_and_max_out_of_five_ints([1, 2, 3, 4, 5]) == [10, 14]:
+        print (True)
+    else:
+        print("False: %s is incorrect" % calculate_min_and_max_out_of_five_ints([1, 2, 3, 4, 5]))
+        
+a,b,c,d,e = input().strip().split(' ')
+five_ints = a,b,c,d,e = [int(a),int(b),int(c),int(d),int(e)]
+
+#test_calculate_min_and_max_out_of_five_ints()
+print (" ".join(str(x) for x in calculate_min_and_max_out_of_five_ints(five_ints)))

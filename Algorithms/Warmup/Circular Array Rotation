@@ -1,0 +1,43 @@
+#!python
+# https://www.hackerrank.com/challenges/circular-array-rotation
+import sys
+
+
+def circular_array_rotation(num_of_rotations, original_list):
+    for i in range(0, num_of_rotations):
+        rotate_list([original_list])
+    return original_list
+
+
+def get_list_with_last_value_first(lst):
+    new_list = lst
+    old_last_item = new_list.pop()
+    new_list.insert(0, old_last_item)
+    return new_list
+
+
+def rotate_list(list_of_lists):
+    new_list = list(map(get_list_with_last_value_first, list_of_lists))
+    return new_list
+
+
+def list_values_at_q_index(old_list, m_list):
+    return [old_list[x] for x in m_list] 
+
+
+def test_circular_array_rotation():
+    print([2, 3, 1] == circular_array_rotation(2, [1, 2, 3]))
+    print([1, 2, 3] == circular_array_rotation(3, [1, 2, 3]))
+    print([3, 1, 2] == circular_array_rotation(4, [1, 2, 3]))
+
+n,k,q = input().strip().split(' ')
+n,k,q = [int(n),int(k),int(q)]
+a = [int(a_temp) for a_temp in input().strip().split(' ')]
+m_list = []
+for a0 in range(q):
+    m = int(input().strip())
+    m_list.append(m)
+
+#test_circular_array_rotation()
+for value in list_values_at_q_index(circular_array_rotation(k,a), m_list):
+    print (value)

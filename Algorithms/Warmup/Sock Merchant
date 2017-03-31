@@ -1,0 +1,31 @@
+#!python
+# https://www.hackerrank.com/challenges/sock-merchant
+
+import sys
+
+def check_for_matching_sock(socks):
+    test_sock = socks.pop()
+    if test_sock in socks:
+        yield test_sock
+
+def sock_merchant(socks):
+    count_of_matches = 0
+    while len(socks) > 0:
+        sock_match = list(check_for_matching_sock(socks))
+        if len(sock_match) > 0:
+            count_of_matches = count_of_matches + 1
+            socks.remove(sock_match[0])
+    return count_of_matches
+            
+
+def test_sock_merchant():
+    print(3 == sock_merchant([10, 20, 20, 10, 10, 30, 50, 10, 20]))
+    print(2 == sock_merchant([20, 20, 10, 10]))
+    print(1 == sock_merchant([20, 20]))
+    print(0 == sock_merchant([20, 10]))
+    
+n = int(input().strip())
+socks = [int(c_temp) for c_temp in input().strip().split(' ')]
+
+test_sock_merchant()
+#print(sock_merchant(socks))

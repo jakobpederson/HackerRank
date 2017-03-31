@@ -1,0 +1,29 @@
+#!/bin/python3
+# https://www.hackerrank.com/challenges/staircase
+
+import sys
+
+def staircase(size_of_staircase):
+    x = " "
+    y = "#"
+    z = []
+    for i in range(0, size_of_staircase):
+        z.append(i * x + (size_of_staircase - i) * y)
+    z.reverse()
+    return z
+
+def test_staircase():
+    expected = [      
+                '     #',
+                '    ##',
+                '   ###',
+                '  ####',
+                ' #####',
+                '######']
+    print("expected:\n%s\nresult:\n%s" % (expected, staircase(6)))
+
+size_of_staircase = int(input().strip())
+
+#test_staircase()
+for line in staircase(size_of_staircase):
+    print (line)

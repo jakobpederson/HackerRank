@@ -1,0 +1,37 @@
+#!/bin/python3
+# https://www.hackerrank.com/challenges/time-conversion
+
+import sys
+
+def new_hour_insert(old_time, new_hour):
+    new_time = old_time
+    new_time.pop(0)
+    new_time.insert(0, new_hour)
+    return new_time
+
+def convert_to_24_hour_format(time):
+    old_time = time[:-2].split(':')
+    if old_time[0] == "12" and time[-2:] == "AM":
+        new_hour = "00"
+    elif old_time[0] == "12" and time[-2:] == "PM":
+        new_hour = "12"
+    elif time[-2:] == "PM":
+        new_hour = str(int(old_time[0]) + 12)
+    else:
+        return time[:-2]
+    twenty_four_time = new_hour_insert(old_time, new_hour)
+    return ':'.join(twenty_four_time)
+
+def test_convert_to_24_hour_format():
+    print("19:05:45" == convert_to_24_hour_format("07:05:45PM"))
+    print("20:05:45" == convert_to_24_hour_format("08:05:45PM"))
+    print("21:05:45" == convert_to_24_hour_format("09:05:45PM"))
+    print("22:05:45" == convert_to_24_hour_format("10:05:45PM"))
+    print("12:05:45" == convert_to_24_hour_format("12:05:45PM"))
+    print("00:05:45" == convert_to_24_hour_format("12:05:45AM"))
+    print("06:40:03" == convert_to_24_hour_format("06:40:03AM"))
+ 
+time = input().strip()
+
+print(convert_to_24_hour_format(time))
+#test_convert_to_24_hour_format()

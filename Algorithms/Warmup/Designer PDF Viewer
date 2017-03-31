@@ -1,0 +1,33 @@
+#!python
+# https://www.hackerrank.com/challenges/designer-pdf-viewer
+
+import sys
+
+def generate_height_list(index, h):
+    heights = []
+    for indice in index:
+        heights.append(h[indice])
+    return heights
+
+def return_index(letter):
+    import string
+    alphabet = list(string.ascii_lowercase)
+    return alphabet.index(letter)
+
+def designer_pdf_viewer(h, word):
+    index = list(map(return_index, list(word)))
+    heights = generate_height_list(index, h)
+    area = len(word) * max(heights)
+    return area
+
+def test_designer_pdf_viewer():
+    h = [1, 3, 1, 3, 1, 4, 1, 3, 2, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5]
+    print("%s (%s)" % (9 == designer_pdf_viewer(h, "abc"), designer_pdf_viewer(h, "abc")))
+    print("%s (%s)" % (15 == designer_pdf_viewer(h, "xyz"), designer_pdf_viewer(h, "xyz")))
+    print("%s (%s)" % (3 == designer_pdf_viewer(h, "ace"), designer_pdf_viewer(h, "ace")))
+
+h = list(map(int, input().strip().split(' ')))
+word = input().strip()
+
+test_designer_pdf_viewer()
+#print(designer_pdf_viewer(h, word))
