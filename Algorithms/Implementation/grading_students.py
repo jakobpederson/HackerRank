@@ -36,6 +36,6 @@ for grades_i in range(n):
     grades.append(grades_t)
 
 # test_grading()
-answers = list(map(solve, grades))
+answers = list(solve(x) for x in grades)
 for answer in answers:
     print(answer)
