@@ -4,15 +4,12 @@
 import sys
 
 def utopian_tree_height(cycles):
-    heights = []
-    for cycle in cycles:
-        heights.append(height_calculator(cycle))
-    return heights
+    return list(height_calculator(x) for x in cycles)
             
 def height_calculator(cycle):
     height = 0
     for i in range(cycle + 1):
-        if i == 0 or i % 2 == 0:
+        if i % 2 == 0:
             height = height + 1
         else:
             height = height * 2
