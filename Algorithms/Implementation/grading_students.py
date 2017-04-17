@@ -14,7 +14,7 @@ def test_grading():
             print("False:", grade)
                         
 def solve(grades):
-    return list(custom_rounding_to_multiple_of_five(x) for x in grades)
+    return list(custom_rounding_to_multiple_of_five2(x) for x in grades)
 
 def custom_rounding_to_multiple_of_five(grade):
     if grade < 38:
@@ -23,6 +23,13 @@ def custom_rounding_to_multiple_of_five(grade):
         grade += 2
     elif grade % 5 == 4:
         grade += 1
+    return grade
+
+def custom_rounding_to_multiple_of_five2(grade):
+    if grade < 38:
+        return grade
+    elif grade % 5 in (3, 4):
+        grade += 5 - (grade % 5)
     return grade
 
 n = int(input().strip())
