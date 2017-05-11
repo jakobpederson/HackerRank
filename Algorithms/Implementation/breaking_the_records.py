@@ -10,10 +10,11 @@ def test_get_record():
     result_1 = getRecord(SCORES_1)
     if result == (2, 4) and result_1 == (4, 0):
         pass
-    elif result_1 != (4, 0):
-        print("Fail %s", result_1)
-    elif result != (2, 4):
-        print("Fail %s", result)
+    else:
+        if result_1 != (4, 0):
+            print("Fail %s", result_1)
+        elif result != (2, 4):
+            print("Fail %s", result)
 
 def getRecord(scores):
     max_score = scores[0]
