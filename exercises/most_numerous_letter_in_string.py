@@ -4,16 +4,15 @@ from itertools import combinations
 
 
 def most_numerous_letter_in_string(word):
-    counter = Counter()
+    counter = Counter(word)
     max_count = 0
     max_letter = []
-    for letter in word:
-       counter.update({letter: 1})
-       if counter[letter] > max_count:
-           max_count = counter[letter]
-           max_letter = [letter]
-       elif counter[letter] == max_count:
-            max_letter.append(letter)
+    for letter in counter.items():
+        if letter[1] > max_count:
+           max_count = letter[1]
+           max_letter = [letter[0]]
+        elif letter[1] == max_count:
+            max_letter.append(letter[0])
     return max_letter
 
 
