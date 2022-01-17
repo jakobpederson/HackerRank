@@ -15,9 +15,10 @@ def most_numerous_letter_in_string(word):
             count[i] += 1
         else:
             count[i] = 1
-        if count[i] == count.get(max_count, 0) and i != max_count:
-            list_of_max_counts.append(i)
-        elif count[i] > count.get(max_count, 0):
+        if i != max_count:
+            if count[i] == count.get(max_count, 0):
+                list_of_max_counts.append(i)
+        if count[i] > count.get(max_count, 0):
             list_of_max_counts = [i]
             max_count = i
     return list_of_max_counts
