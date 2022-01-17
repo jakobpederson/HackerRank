@@ -4,9 +4,23 @@ from itertools import combinations
 
 
 def most_numerous_letter_in_string(word):
-    counter = Counter(word)
-    max_value = max(counter.items(), key=lambda x: x[1])[1]
-    return [key for key, val in counter.items() if val == max_value]
+    # counter = Counter(word)
+    # max_value = max(counter.items(), key=lambda x: x[1])[1]
+    # return [key for key, val in counter.items() if val == max_value]
+    count = {}
+    max_count = None
+    list_of_max_counts = []
+    for i in word:
+        if count.get(i):
+            count[i] += 1
+        else:
+            count[i] = 1
+        if count[i] == count.get(max_count, 0) and i != max_count:
+            list_of_max_counts.append(i)
+        elif count[i] > count.get(max_count, 0):
+            list_of_max_counts = [i]
+            max_count = i
+    return list_of_max_counts
 
 
 class MostNumerousLetterInStringTests(TestCase):
@@ -21,7 +35,7 @@ class MostNumerousLetterInStringTests(TestCase):
         result = most_numerous_letter_in_string(word)
         self.assertEqual(result, ['z'])
 
-    def test_most_numerous_letter_handles_two_equal_number_of_max_letters(self):
+    def test_most_numerous_letter_handles_two_equal_number_of_max_counts(self):
         word = 'aaadfjezzz'
         result = most_numerous_letter_in_string(word)
         self.assertCountEqual(result, ['z', 'a'])
